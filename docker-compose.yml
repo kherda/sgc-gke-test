@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ./code:/code
+            - ./site.conf:/etc/nginx/conf.d/site.conf
+    php:
+        image: php:7-fpm
+        volumes:
+            - ./code:/code
+            - ./log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+    mailgun:
+        image: stevenolen/mailgun-smtp-server
+        environment:
+          MG_DOMAIN: mail.sgcmail.com
+          MG_KEY: 4be68a2b77f673a73616b15d7100e1b1
+        ports:
+            - "25:25"
