@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo
+  labels:
+    name: demo
+spec:
+  containers:
+    - name: web
+      # TODO: set this with your zone and project id
+      image: "us.gcr.io/sgc-gke-tutorial/nginx"
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+
+    - name: php
+      # TODO: set this with your zone and project id
+      image: "us.gcr.io/sgc-gke-tutorial/php7"
+      imagePullPolicy: Always
