@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+main() {
+	local namespace=production
+
+	docker-compose build
+	docker-compose push
+
+	kubectl apply -f k8s/production-namespace.yml --namespace "${namespace}"
+
+	kubectl apply -f k8s/production-redis-service.yml --namespace "${namespace}"
+	kubectl apply -f k8s/production-server-service.yml --namespace "${namespace}"
+
+	kubectl apply -f k8s/production-redis-pod.yml --namespace "${namespace}"
+	kubectl apply -f k8s/production-server-deployment.yml --namespace "${namespace}"
+	kubectl apply -f k8s/production-support-deployment.yml --namespace "${namespace}"
+
+	kubectl get pods --namespace "${namespace}"
+}
+
+main "$@"
