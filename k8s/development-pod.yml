@@ -6,9 +6,9 @@ metadata:
     name: demo
 spec:
   containers:
-    - name: web
+    - name: webserver
       # TODO: set this with your zone and project id
-      image: "us.gcr.io/sgc-gke-tutorial/nginx"
+      image: "nginx:latest"
       imagePullPolicy: Always
       ports:
         - containerPort: 8080
@@ -16,5 +16,5 @@ spec:
 
     - name: php
       # TODO: set this with your zone and project id
-      image: "us.gcr.io/sgc-gke-tutorial/php7"
+      image: "php:7-fpm"
       imagePullPolicy: Always
